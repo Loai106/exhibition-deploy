@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
-import { ListItemButton } from "@mui/material";
+import { ListItemButton, Typography } from "@mui/material";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -53,7 +53,21 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="static" sx={appBarStyles}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Toolbar sx={{ justifyContent: "space-evenly" }}>
+           {/* Logo */}
+           <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{
+              color: "white",
+              textDecoration: "none",
+              fontWeight: "bold",
+              fontSize: "24px",
+            }}
+          >
+            Life Canvas
+          </Typography>
           {/* Hamburger Menu for Mobile */}
           <IconButton
             color="inherit"
