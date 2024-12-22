@@ -1,11 +1,16 @@
-import { Box } from "@mui/material"
+import { Box } from "@mui/material";
+import Header from "../components/home/Header";
+import About from "../components/home/About";
+import Workshops from "../components/home/Workshops";
 
 const Home = () => {
   return (
     <Box>
-      Box Page
+      <Header />
+      <About />
+      <Workshops />
     </Box>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Grid from "@mui/material/Grid2";
@@ -61,59 +61,62 @@ const Header: React.FC = () => {
               zIndex: 1,
             }}
           />
-
-          {/* Content */}
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-            spacing={4}
+          <Container
             sx={{
-              position: "relative",
-              zIndex: 2,
               height: "100%",
-              px: 4,
-              textAlign: "center",
             }}
           >
-            <Grid size={6}>
-              <Typography variant="h2" gutterBottom>
-                {image.text}
-              </Typography>
-              <Typography variant="body1">{image.description}</Typography>
-            </Grid>
-
-            {/* Static Image with Hover Animation */}
+            {/* Content */}
             <Grid
-              size={4}
+              container
+              alignItems="center"
+              justifyContent="center"
+              spacing={4}
               sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+                position: "relative",
+                zIndex: 2,
+                height: "100%",
               }}
             >
-              <Box
+              <Grid size={6}>
+                <Typography variant="h5" gutterBottom>
+                  {image.text}
+                </Typography>
+                <Typography variant="body1">{image.description}</Typography>
+              </Grid>
+
+              {/* Static Image with Hover Animation */}
+              <Grid
+                size={6}
                 sx={{
-                  transition:
-                    "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                  "&:hover": {
-                    transform: "scale(1.15)",
-                    boxShadow: "0 12px 20px rgba(0, 0, 0, 0.3)",
-                  },
-                  boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 <Box
-                  component="img"
-                  src={image.url}
-                  alt="Decorative"
                   sx={{
-                    borderRadius: "24px",
+                    transition:
+                      "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    "&:hover": {
+                      transform: "scale(1.15)",
+                      boxShadow: "0 12px 20px rgba(0, 0, 0, 0.3)",
+                    },
+                    boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
                   }}
-                />
-              </Box>
+                >
+                  <Box
+                    component="img"
+                    src={image.url}
+                    alt="Decorative"
+                    sx={{
+                      borderRadius: "24px",
+                    }}
+                  />
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
         </Box>
       ))}
     </Carousel>

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, Grid2 as Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  Grid2 as Grid,
+  Container,
+} from "@mui/material";
 
 // Text content saved in a variable
 const aboutText = `  Amid the rubble of war and the echoes of explosions, the colors of
@@ -32,15 +38,13 @@ const About: React.FC = () => {
   };
 
   return (
-    <Box
+    <Container
       sx={{
-        py: 8,
-        px: { xs: 3, md: 8 },
         backgroundColor: "#fff",
         color: "#333",
       }}
     >
-      <Grid container spacing={4} alignItems="center">
+      <Grid container spacing={4} alignItems="center" py={8}>
         {/* Left Column: Text Section */}
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography
@@ -110,7 +114,7 @@ const About: React.FC = () => {
           />
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 
