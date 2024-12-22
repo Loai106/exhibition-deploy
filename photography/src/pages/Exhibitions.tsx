@@ -4,6 +4,7 @@ import LandingSection from "../components/shared/Landing";
 import PageTitle from "../components/shared/PageTitle";
 import ImageCard from "../components/shared/ImageCard";
 import Logo from "/images/logo.png";
+import LoaderDialog from "../shared/Loader";
 
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
@@ -12,15 +13,19 @@ const Exhibitions = () => {
     <>
       <LandingSection />
       <PageTitle title="Exhibitions" alignment="center" />
-      <Grid container spacing={4} sx={{ mb: 4 }}>
-        {paintingsData?.data?.map((painting) => (
-          <ImageCard
-            image={Logo} //TODO:Need to replace with actual image
-            title={painting.paintingName}
-            desc={painting.artists[0].artistName}
-          />
-        ))}
-      </Grid>
+      {isLoading ? (
+        <LoaderDialog loading={isLoading} />
+      ) : (
+        <Grid container spacing={4} sx={{ mb: 4 }}>
+          {paintingsData?.data?.map((painting) => (
+            <ImageCard
+              image={Logo} //TODO:Need to replace with actual image
+              title={painting.paintingName}
+              desc={painting.artists[0].artistName || "--"}
+            />
+          ))}
+        </Grid>
+      )}
     </>
   );
 };

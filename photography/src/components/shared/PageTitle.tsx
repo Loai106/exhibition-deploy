@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-const PageTitle = ({ title, subtitle, alignment, sx }: PageTitleProps) => {
+const PageTitle = ({
+  title,
+  subtitle,
+  alignment = "center",
+  sx,
+}: PageTitleProps) => {
   return (
     <Box
       sx={{
@@ -12,12 +17,13 @@ const PageTitle = ({ title, subtitle, alignment, sx }: PageTitleProps) => {
       }}
     >
       <Typography
-        variant="h2"
+        variant="h3" // Adjusted variant for better responsiveness
         component="h1"
         sx={{
           fontWeight: "bold",
           color: "#1a73e8",
           margin: 0,
+          fontSize: { xs: "24px", sm: "32px", md: "40px" }, // Responsive font size
           ...sx?.title,
         }}
       >
@@ -25,10 +31,11 @@ const PageTitle = ({ title, subtitle, alignment, sx }: PageTitleProps) => {
       </Typography>
       {subtitle && (
         <Typography
-          variant="subtitle1"
+          variant="body1" // Changed variant for better scaling
           sx={{
             color: "text.secondary",
             marginTop: "5px",
+            fontSize: { xs: "14px", sm: "16px", md: "18px" }, // Responsive font size
             ...sx?.subtitle,
           }}
         >
@@ -49,4 +56,5 @@ interface PageTitleProps {
     subtitle?: React.CSSProperties;
   };
 }
+
 export default PageTitle;

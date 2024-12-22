@@ -14,10 +14,13 @@ const ImageCard = ({ image, title, desc }: ImageCardProps) => {
         alignItems: "center",
         textAlign: "center",
         cursor: "pointer",
-        ":hover": {
-            color: "#1a73e8",
-          },
+        color: "inherit",
+        transition: "color 0.3s ease",
+        ":hover, :focus-within": {
+          color: "#1a73e8",
+        },
       }}
+      tabIndex={0} // Make grid focusable for mobile hover effect
     >
       {/* Workshop Image */}
       <Box
@@ -31,10 +34,10 @@ const ImageCard = ({ image, title, desc }: ImageCardProps) => {
           borderRadius: 2,
           boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
           mb: 2,
-          transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth transition
-          ":hover": {
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          ":hover, :focus-within": {
             transform: "scale(1.05)", // Slight zoom effect
-            boxShadow: "0 12px 30px rgba(0, 0, 0, 0.2)", // Increased shadow on hover
+            boxShadow: "0 12px 30px rgba(0, 0, 0, 0.2)", // Enhanced shadow on hover
           },
         }}
       />
@@ -49,7 +52,12 @@ const ImageCard = ({ image, title, desc }: ImageCardProps) => {
         {title}
       </Typography>
       {/* Workshop Description */}
-      <Typography variant="body2" sx={{ color: "#666" }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: "#666",
+        }}
+      >
         {desc}
       </Typography>
     </Grid>

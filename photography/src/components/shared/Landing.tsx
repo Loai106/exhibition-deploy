@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import bg from  "../../../public/images/landing.webp"
+import bg from "../../../public/images/landing.webp";
 
 const LandingSection: React.FC = () => {
   return (
     <Box
       sx={{
         position: "relative",
-        height: "60vh", // Full viewport height
-        backgroundImage: `url(${bg})`, // Replace with your image path
+        height: { xs: "70vh", sm: "60vh", md: "80vh" }, // Responsive height
+        backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -17,7 +17,7 @@ const LandingSection: React.FC = () => {
         justifyContent: "center",
         color: "white",
         textAlign: "center",
-        boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.5)", // Shadow around the section
+        boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.5)",
       }}
     >
       {/* Gradient Overlay */}
@@ -29,7 +29,7 @@ const LandingSection: React.FC = () => {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9))", // Gradient effect
+            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9))",
           zIndex: 1,
         }}
       />
@@ -38,26 +38,27 @@ const LandingSection: React.FC = () => {
       <Box
         sx={{
           position: "relative",
-          zIndex: 2, // Above the overlay
-          maxWidth: "600px",
+          zIndex: 2,
+          maxWidth: { xs: "90%", sm: "600px" }, // Responsive maxWidth
           padding: "20px",
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3" // Adjusted for smaller screens
           sx={{
             fontWeight: "bold",
             mb: 2,
-            textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", // Text shadow for clarity
+            fontSize: { xs: "28px", sm: "36px", md: "48px" }, // Responsive font size
+            textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
           }}
         >
           Welcome to Life Canvas
         </Typography>
         <Typography
-          variant="h6"
+          variant="body1" // Adjusted for smaller screens
           sx={{
             mb: 4,
-            fontSize: "18px",
+            fontSize: { xs: "14px", sm: "16px", md: "18px" }, // Responsive font size
             lineHeight: 1.5,
             textShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
           }}
@@ -70,14 +71,14 @@ const LandingSection: React.FC = () => {
           color="primary"
           size="large"
           sx={{
-            px: 4,
+            px: { xs: 3, sm: 4 }, // Responsive padding
             py: 1.5,
-            fontSize: "16px",
+            fontSize: { xs: "14px", sm: "16px" }, // Responsive font size
             fontWeight: "bold",
             borderRadius: "25px",
-            boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)", // Button shadow
+            boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
             ":hover": {
-              backgroundColor: "#1a73e8", // Slightly lighter blue on hover
+              backgroundColor: "#1a73e8",
               boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.5)",
             },
           }}

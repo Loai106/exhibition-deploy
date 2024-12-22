@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid2 as Grid } from "@mui/material";
 import ImageCard from "../shared/ImageCard";
+import PageTitle from "../shared/PageTitle";
 
 const workshops = [
   {
@@ -42,18 +43,7 @@ const Workshops: React.FC = () => {
         color: "#333",
       }}
     >
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontWeight: "bold",
-          textAlign: "center",
-          mb: 4,
-          color: "#1a73e8", // Adjust color to match theme
-        }}
-      >
-        Workshops
-      </Typography>
+      <PageTitle title="Workshops" alignment="center" />
       <Grid container spacing={4}>
         {workshops.map((workshop, index) => (
           <ImageCard

@@ -1,7 +1,11 @@
-import { Box } from "@mui/material";
+import LandingSection from "../components/shared/Landing";
+import PageTitle from "../components/shared/PageTitle";
 
 const Artists = () => {
-  return <Box>Hello Artis</Box>;
+  return <>
+  <LandingSection />
+  <PageTitle title="Artists" alignment="center" />
+  </>
 };
 
 export default Artists;
