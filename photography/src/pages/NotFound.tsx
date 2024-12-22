@@ -1,21 +1,20 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Typography, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <Box
+    <Stack
+      justifyContent={"center"}
+      alignItems={"center"}
+      flex={1}
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        textAlign: "center",
         backgroundColor: "#f8f9fa",
-        padding: "2rem",
       }}
     >
-      <Typography variant="h1" sx={{ fontSize: "6rem", fontWeight: "700", color: "#005288" }}>
+      <Typography
+        variant="h1"
+        sx={{ fontSize: "6rem", fontWeight: "700", color: "#005288" }}
+      >
         404
       </Typography>
       <Typography variant="h6" sx={{ marginBottom: "1rem", color: "#555" }}>
@@ -36,7 +35,7 @@ const NotFound = () => {
       >
         Go Back to Home
       </Button>
-    </Box>
+    </Stack>
   );
 };
 

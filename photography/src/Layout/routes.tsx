@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Exhibitions from "../pages/Exhibitions";
-import Root from "./Root";
+import AppRoot from "./AppRoot";
 import Artists from "../pages/Artists";
 import NotFound from "../pages/NotFound";
 
@@ -9,7 +9,7 @@ const Routes = () => {
   const Routing = createBrowserRouter([
     {
       path: "",
-      element: <Root />,
+      element: <AppRoot />,
       children: [
         {
           index: true,
@@ -22,10 +22,11 @@ const Routes = () => {
         {
           path: "/artists",
           element: <Artists />,
-        },{
+        },
+        {
           path: "*",
           element: <NotFound />,
-        }
+        },
       ],
     },
   ]);
