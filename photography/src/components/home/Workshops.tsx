@@ -1,5 +1,7 @@
 import React from "react";
 import { Box, Typography, Grid2 as Grid } from "@mui/material";
+import ImageCard from "../shared/ImageCard";
+import PageTitle from "../shared/PageTitle";
 
 const workshops = [
   {
@@ -41,63 +43,15 @@ const Workshops: React.FC = () => {
         color: "#333",
       }}
     >
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontWeight: "bold",
-          textAlign: "center",
-          mb: 4,
-          color: "#1a73e8", // Adjust color to match theme
-        }}
-      >
-        Workshops
-      </Typography>
+      <PageTitle title="Workshops" alignment="center" />
       <Grid container spacing={4}>
         {workshops.map((workshop, index) => (
-          <Grid
-            size={{
-              xs: 12,
-              sm: 6,
-              md: 4,
-            }}
+          <ImageCard
+            image={workshop.image}
+            title={workshop.title}
+            desc={workshop.description}
             key={index}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            {/* Workshop Image */}
-            <Box
-              component="img"
-              src={workshop.image}
-              alt={workshop.title}
-              sx={{
-                width: "100%",
-                maxWidth: "300px",
-                height: "auto",
-                borderRadius: 2,
-                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
-                mb: 2,
-              }}
-            />
-            {/* Workshop Title */}
-            <Typography
-              variant="h6"
-              gutterBottom
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              {workshop.title}
-            </Typography>
-            {/* Workshop Description */}
-            <Typography variant="body2" sx={{ color: "#666" }}>
-              {workshop.description}
-            </Typography>
-          </Grid>
+          />
         ))}
       </Grid>
     </Box>
