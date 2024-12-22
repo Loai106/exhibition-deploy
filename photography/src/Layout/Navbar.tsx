@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,6 +13,7 @@ import Logo from "/images/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -39,9 +40,9 @@ const Navbar = () => {
     </List>
   );
 
-  const appBarStyles = {
-    backgroundColor: "#005288",
-  };
+  // const appBarStyles = {
+  //   backgroundColor: "#005288",
+  // };
 
   const linkStyles = {
     color: "white",
@@ -50,6 +51,24 @@ const Navbar = () => {
     fontSize: "18px",
     padding: "0 1rem",
   };
+
+  const appBarStyles = {
+    backgroundColor: scrolled ? "#005288" : "transparent", // Dynamic background
+    transition: "background-color 0.3s ease", // Smooth transition
+    boxShadow: scrolled ? "0 4px 10px rgba(0, 0, 0, 0.1)" : "none", // Optional shadow
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 400); // Change to true if scrolled more than 50px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -61,7 +80,7 @@ const Navbar = () => {
               px: "0px !important",
               justifyContent: {
                 xs: "space-between",
-                md: "flex-start",
+                md: "space-around",
               },
             }}
           >
