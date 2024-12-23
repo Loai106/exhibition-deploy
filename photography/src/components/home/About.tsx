@@ -5,9 +5,8 @@ import {
   Grid2 as Grid,
   Container,
 } from "@mui/material";
-// import aboutvideo from "/images/about.mp4"; // Import the video file
 import { useNavigate } from "react-router-dom";
-// Text content saved in a variable
+
 const aboutText = `
 Amid the rubble of war and the echoes of explosions, the colors of hope emerged in the "Life Canvas: Insights from Gaza" exhibition. Here, suffering transformed into creativity, and pain turned into stories told through the strokes of a paintbrush.
 The exhibition, implemented by Spark for Innovation and Creativity in Deir Al-Balah, Gaza, was organized in partnership with the Save Youth Future Society, with support from the United Nations Population Fund (UNFPA), and funded by Education Above All.
@@ -33,14 +32,13 @@ const About = () => {
       }}
     >
       <Grid container spacing={4} alignItems="center" py={8}>
-        {/* Left Column: Text Section */}
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography
             variant="h4"
             gutterBottom
             sx={{
               fontWeight: "bold",
-              color: "#1a73e8", // Adjust the color to match the screenshot
+              color: "#1a73e8",
               display: "inline",
             }}
           >
@@ -83,7 +81,6 @@ const About = () => {
           </Button>
         </Grid>
 
-        {/* Right Column: Image Section */}
         <Grid
           size={{
             xs: 12,
@@ -91,20 +88,17 @@ const About = () => {
           }}
         >
           <Box
-            component="video"
-            src={""}
+            component="iframe"
+            src="https://www.youtube.com/embed/SqMg3_OmXSA?autoplay=1&mute=1"
             title="Spark Exhibition Video"
-            autoPlay
-            muted
-            controls // Adds playback controls
-            loop // Ensures the video repeats
-            style={{
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            sx={{
               width: "100%",
               height: "315px",
               borderRadius: "8px",
               boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
               border: "none",
-              objectFit: "cover", // Ensures the video fits properly
             }}
           />
         </Grid>
