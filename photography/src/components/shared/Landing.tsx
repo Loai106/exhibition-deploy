@@ -34,11 +34,9 @@ const LandingSection = ({
     >
       {showVideo && (
         <Box
-          component="video"
-          src={""}
-          autoPlay
-          loop
-          playsInline
+          component="iframe"
+          src="https://www.youtube.com/embed/SqMg3_OmXSA?autoplay=1"
+          allow="autoplay; encrypted-media"
           sx={{
             position: "absolute",
             top: 0,
