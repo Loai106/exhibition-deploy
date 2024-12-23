@@ -1,6 +1,6 @@
 import { Box, Grid2 as Grid, Typography } from "@mui/material";
 
-const ImageCard = ({ image, title, desc }: ImageCardProps) => {
+const ImageCard = ({ image, title, desc, onClick }: ImageCardProps) => {
   return (
     <Grid
       size={{
@@ -20,6 +20,7 @@ const ImageCard = ({ image, title, desc }: ImageCardProps) => {
           color: "#1a73e8",
         },
       }}
+      onClick={onClick}
       tabIndex={0} // Make grid focusable for mobile hover effect
     >
       {/* Workshop Image */}
@@ -70,4 +71,5 @@ interface ImageCardProps {
   image: string;
   title: string;
   desc: string;
+  onClick: () => void;
 }
