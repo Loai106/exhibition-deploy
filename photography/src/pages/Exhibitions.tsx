@@ -1,9 +1,8 @@
-import { Box, Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 import useGetAllPainting from "../hooks/useGetAllPainting";
 import LandingSection from "../components/shared/Landing";
 import PageTitle from "../components/shared/PageTitle";
 import ImageCard from "../components/shared/ImageCard";
-import Logo from "/images/logo.png";
 import LoaderDialog from "../shared/Loader";
 
 const Exhibitions = () => {
@@ -13,19 +12,18 @@ const Exhibitions = () => {
     <>
       <LandingSection />
       <PageTitle title="Exhibitions" alignment="center" />
-      {isLoading ? (
-        <LoaderDialog loading={isLoading} />
-      ) : (
-        <Grid container spacing={4} sx={{ mb: 4 }}>
-          {paintingsData?.data?.map((painting) => (
-            <ImageCard
-              image={Logo} //TODO:Need to replace with actual image
-              title={painting.paintingName}
-              desc={painting.artists[0].artistName || "--"}
-            />
-          ))}
-        </Grid>
-      )}
+
+      <LoaderDialog loading={isLoading} />
+
+      <Grid container spacing={4} sx={{ mb: 4 }}>
+        {paintingsData?.data?.map((painting) => (
+          <ImageCard
+            image={painting.painting_url} //TODO:Need to replace with actual image
+            title={painting.paintingName}
+            desc={painting.artists[0]?.firstName || "--"}
+          />
+        ))}
+      </Grid>
     </>
   );
 };

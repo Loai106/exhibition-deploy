@@ -19,6 +19,7 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Exhibitions", path: "/exhibitions" },
     { label: "Artists", path: "/artists" },
+    { label: "About", path: "/about" },
   ];
 
   const handleDrawerToggle = () => {

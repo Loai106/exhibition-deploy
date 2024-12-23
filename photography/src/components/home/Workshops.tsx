@@ -1,37 +1,20 @@
 import React from "react";
-import { Box, Typography, Grid2 as Grid } from "@mui/material";
-import ImageCard from "../shared/ImageCard";
+import { Box } from "@mui/material";
 import PageTitle from "../shared/PageTitle";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import { Carousel } from "react-responsive-carousel";
+import img1 from "/images/img1.jpg";
+import img2 from "/images/img2.jpg";
+import img3 from "/images/img3.jpg";
+import img4 from "/images/img4.jpg";
+import img5 from "/images/img5.jpg";
+import img6 from "/images/img6.jpg";
+import img7 from "/images/img7.jpg";
+import img8 from "/images/img8.jpg";
+import img9 from "/images/img9.jpg";
+import img10 from "/images/img10.jpg";
 
-const workshops = [
-  {
-    image:
-      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", // Replace with actual image URL
-    title: "Creative Painting Workshop",
-    description:
-      "Explore the basics of painting techniques and express your creativity on canvas.",
-  },
-  {
-    image:
-      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", // Replace with actual image URL
-    title: "Photography Essentials",
-    description:
-      "Learn the art of capturing stunning photographs and mastering camera settings.",
-  },
-  {
-    image:
-      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg", // Replace with actual image URL
-    title: "Sculpture Design",
-    description:
-      "Dive into the world of sculpture making and unleash your 3D design skills.",
-  },
-  {
-    image: "https://via.placeholder.com/300x200", // Replace with actual image URL
-    title: "Digital Art Workshop",
-    description:
-      "Discover how to create digital masterpieces using the latest tools and techniques.",
-  },
-];
+const workshops = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
 
 const Workshops: React.FC = () => {
   return (
@@ -44,16 +27,61 @@ const Workshops: React.FC = () => {
       }}
     >
       <PageTitle title="Workshops" alignment="center" />
-      <Grid container spacing={4}>
-        {workshops.map((workshop, index) => (
-          <ImageCard
-            image={workshop.image}
-            title={workshop.title}
-            desc={workshop.description}
+
+      {/* Carousel Section */}
+      <Carousel
+        showThumbs={true}
+        infiniteLoop
+        autoPlay
+        interval={4000}
+        showStatus={true}
+        dynamicHeight={false}
+        thumbWidth={100} // Controls the width of thumbnails
+        renderThumbs={() =>
+          workshops.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Thumbnail ${index + 1}`}
+              style={{
+                height: "60px", // Adjust thumbnail height
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+          ))
+        }
+      >
+        {workshops.map((image, index) => (
+          <Box
             key={index}
-          />
+            sx={{
+              bgcolor: "black",
+              borderRadius: "8px",
+            }}
+          >
+            <Box
+              sx={{
+                width: "80%",
+                margin: "auto",
+              }}
+            >
+              <Box
+                component="img"
+                src={image}
+                alt={`Workshop Image ${index + 1}`}
+                sx={{
+                  height: {
+                    xs: "40vh",
+                    sm: "60vh",
+                  },
+                  objectFit: "cover",
+                }}
+              />
+            </Box>
+          </Box>
         ))}
-      </Grid>
+      </Carousel>
     </Box>
   );
 };

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,35 +5,24 @@ import {
   Grid2 as Grid,
   Container,
 } from "@mui/material";
-
+// import aboutvideo from "/images/about.mp4"; // Import the video file
+import { useNavigate } from "react-router-dom";
 // Text content saved in a variable
-const aboutText = `  Amid the rubble of war and the echoes of explosions, the colors of
-            hope emerged in the "Life Canvas: Insights from Gaza" exhibition.
-            Here, suffering transformed into creativity, and pain turned into
-            stories told through the strokes of a paintbrush.
-            <br />
-            The exhibition, implemented by Spark for Innovation and Creativity
-            in Deir Al-Balah, Gaza, was organized in partnership with the Save
-            Youth Future Society, with support from the United Nations
-            Population Fund (UNFPA), and funded by Education Above All.
-            <br />
-            The exhibition features the works of 29 Palestinian artists, each
-            of whom used their imagination and colors to depict the daily
-            realities of life during war. Their works showcase scenes of
-            destruction, long queues for bread and water, and images of the
-            wounded and displaced. Yet, amid this pain, glimpses of hope shined
-            through every corner of the exhibition.
-            <br />
-            Some of the paintings combined images of destruction with symbols
-            of hope, such as green wheat stalks sprouting from rubble and trees
-            emerging from beneath the ruins, reflecting the enduring spirit of
-            life despite the devastation.`;
+const aboutText = `
+Amid the rubble of war and the echoes of explosions, the colors of hope emerged in the "Life Canvas: Insights from Gaza" exhibition. Here, suffering transformed into creativity, and pain turned into stories told through the strokes of a paintbrush.
+The exhibition, implemented by Spark for Innovation and Creativity in Deir Al-Balah, Gaza, was organized in partnership with the Save Youth Future Society, with support from the United Nations Population Fund (UNFPA), and funded by Education Above All.
 
-const About: React.FC = () => {
-  const [expanded, setExpanded] = useState(false);
+The exhibition features the works of 29 Palestinian artists, each of whom used their imagination and colors to depict the daily realities of life during war. Their works showcase scenes of destruction, long queues for bread and water, and images of the wounded and displaced. Yet, amid this pain, glimpses of hope shined through every corner of the exhibition.
+
+Some of the paintings combined images of destruction with symbols of hope, such as green wheat stalks sprouting from rubble and trees emerging from beneath the ruins, reflecting the enduring spirit of life despite the devastation.
+
+While dark`;
+
+const About = () => {
+  const navigate = useNavigate();
 
   const toggleReadMore = () => {
-    setExpanded(!expanded);
+    navigate("/about");
   };
 
   return (
@@ -70,8 +58,8 @@ const About: React.FC = () => {
             paragraph
             sx={{
               mt: 2,
-              display: expanded ? "block" : "-webkit-box",
-              WebkitLineClamp: 4,
+              display: "-webkit-box",
+              WebkitLineClamp: 8,
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -91,7 +79,7 @@ const About: React.FC = () => {
               },
             }}
           >
-            {expanded ? "Read Less" : "Read More"}
+            Read More
           </Button>
         </Grid>
 
@@ -103,13 +91,20 @@ const About: React.FC = () => {
           }}
         >
           <Box
-            component="img"
-            src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" // Replace with your image URL
-            alt="Spark Exhibition"
-            sx={{
+            component="video"
+            src={""}
+            title="Spark Exhibition Video"
+            autoPlay
+            muted
+            controls // Adds playback controls
+            loop // Ensures the video repeats
+            style={{
               width: "100%",
-              borderRadius: 2,
+              height: "315px",
+              borderRadius: "8px",
               boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+              border: "none",
+              objectFit: "cover", // Ensures the video fits properly
             }}
           />
         </Grid>

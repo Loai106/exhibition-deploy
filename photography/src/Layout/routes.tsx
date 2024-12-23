@@ -4,6 +4,7 @@ import Exhibitions from "../pages/Exhibitions";
 import AppRoot from "./AppRoot";
 import Artists from "../pages/Artists";
 import NotFound from "../pages/NotFound";
+import About from "../pages/About";
 
 const Routes = () => {
   const Routing = createBrowserRouter([
@@ -22,6 +23,10 @@ const Routes = () => {
         {
           path: "/artists",
           element: <Artists />,
+        },
+        {
+          path: "/about",
+          element: <About />,
         },
         {
           path: "*",

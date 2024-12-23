@@ -1,14 +1,24 @@
-import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import bg from "../../../public/images/landing.webp";
+import bg from "/images/landing.webp";
+// import aboutVideo from "/images/about.mp4";
 
-const LandingSection: React.FC = () => {
+interface LandingSectionProps {
+  title?: string;
+  description?: string;
+  showVideo?: boolean;
+}
+
+const LandingSection = ({
+  title,
+  description,
+  showVideo = false,
+}: LandingSectionProps) => {
   return (
     <Box
       sx={{
         position: "relative",
         height: { xs: "70vh", sm: "60vh", md: "80vh" }, // Responsive height
-        backgroundImage: `url(${bg})`,
+        backgroundImage: showVideo ? "" : `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -17,9 +27,27 @@ const LandingSection: React.FC = () => {
         justifyContent: "center",
         color: "white",
         textAlign: "center",
-        boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.5)",
+        boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
       }}
     >
+      {showVideo && (
+        <Box
+          component="video"
+          src={""}
+          autoPlay
+          loop
+          playsInline
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 0,
+          }}
+        />
+      )}
       {/* Gradient Overlay */}
       <Box
         sx={{
@@ -52,7 +80,7 @@ const LandingSection: React.FC = () => {
             textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
           }}
         >
-          Welcome to Life Canvas
+          {title ?? "Welcome to Life Canvas"}
         </Typography>
         <Typography
           variant="body1" // Adjusted for smaller screens
@@ -63,8 +91,8 @@ const LandingSection: React.FC = () => {
             textShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
           }}
         >
-          Empowering art and creativity to bring hope and support to the less
-          fortunate. Join us in making a difference through art.
+          {description ??
+            "Empowering art and creativity to bring hope and support to the less fortunate. Join us in making a difference through art."}
         </Typography>
         <Button
           variant="contained"
