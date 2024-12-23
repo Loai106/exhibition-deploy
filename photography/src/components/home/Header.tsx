@@ -3,35 +3,34 @@ import { Box, Container, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Grid from "@mui/material/Grid2";
+import img1 from "/images/img1.jpg";
+import img2 from "/images/img2.jpg";
+import img3 from "/images/img3.jpg";
 
 const Header: React.FC = () => {
   const images = [
     {
-      url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-      text: "Welcome to Our Photography Site",
-      description:
-        "Explore the world through our lens. Capturing moments that matter the most.",
+      url: img1,
+      text: "Explore Stunning Photography",
+      description: "Discover captivating moments captured through our lens.",
     },
     {
-      url: "https://img.freepik.com/free-photo/view-chameleon-with-bright-neon-colors_23-2151682707.jpg",
-      text: "Dive into Vibrant Colors",
-      description:
-        "Experience the beauty of nature and creativity through vivid photography.",
+      url: img3,
+      text: "Unveil Unique Perspectives",
+      description: "Experience the art of storytelling through photography.",
     },
     {
-      url: "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-      text: "Welcome to Our Photography Site",
-      description:
-        "Explore the world through our lens. Capturing moments that matter the most.",
+      url: img2,
+      text: "Embrace Vibrant Colors",
+      description: "Dive into the beauty and creativity of vivid imagery.",
     },
   ];
-
   return (
     <Carousel
       showThumbs={false}
       infiniteLoop
       autoPlay
-      interval={3000}
+      interval={5000}
       showStatus={false}
       showIndicators={true}
       showArrows={false}
@@ -69,8 +68,9 @@ const Header: React.FC = () => {
             {/* Content */}
             <Grid
               container
+              direction={{ xs: "column", md: "row" }}
               alignItems="center"
-              justifyContent="center"
+              justifyContent={{ xs: "center", md: "space-between" }}
               spacing={4}
               sx={{
                 position: "relative",
@@ -78,8 +78,13 @@ const Header: React.FC = () => {
                 height: "100%",
               }}
             >
-              <Grid size={6}>
-                <Typography variant="h5" gutterBottom>
+              <Grid
+                size={{
+                  xs: 12,
+                  md: 6,
+                }}
+              >
+                <Typography variant="h4" gutterBottom>
                   {image.text}
                 </Typography>
                 <Typography variant="body1">{image.description}</Typography>
@@ -87,7 +92,10 @@ const Header: React.FC = () => {
 
               {/* Static Image with Hover Animation */}
               <Grid
-                size={6}
+                size={{
+                  xs: 12,
+                  md: 6,
+                }}
                 sx={{
                   display: "flex",
                   justifyContent: "center",
