@@ -7,11 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
   const navigate = useNavigate();
-
-  // Navigate to the painting details page when a painting is clicked
   const handleCardClick = (paintId: any) => {
-    console.log("paintId", paintId);
-    navigate(`/exhibitions/${paintId}`);
+    navigate(`/exhibitions/${paintId}`, { state: { paintId } });
   };
   return (
     <>

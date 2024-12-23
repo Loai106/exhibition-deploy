@@ -20,10 +20,12 @@ const Routes = () => {
         {
           path: "/exhibitions",
           element: <Exhibitions />,
-        },
-        {
-          path: "/exhibitions/:id",
-          element: <ExhibitionDetail />,
+          children: [
+            {
+              path: "/:id",
+              element: <ExhibitionDetail />,
+            },
+          ],
         },
         {
           path: "/artists",
