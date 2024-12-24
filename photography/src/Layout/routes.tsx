@@ -20,13 +20,13 @@ const Routes = () => {
         {
           path: "/exhibitions",
           element: <Exhibitions />,
-          children: [
-            {
-              path: "/:id",
-              element: <ExhibitionDetail />,
-            },
-          ],
         },
+
+        {
+          path: "/exhibitions/:id",
+          element: <ExhibitionDetail />,
+        },
+
         {
           path: "/artists",
           element: <Artists />,
