@@ -27,7 +27,8 @@ const ImageCard = ({
           color: "#1a73e8",
         },
       }}
-      tabIndex={0}
+      onClick={onClick}
+      tabIndex={0} // Make grid focusable for mobile hover effect
       key={key}
     >
       {loading ? (

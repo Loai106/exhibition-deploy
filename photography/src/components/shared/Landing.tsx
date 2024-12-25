@@ -6,9 +6,11 @@ interface LandingSectionProps {
   title?: string;
   description?: string;
   showVideo?: boolean;
+  image?: string;
 }
 
 const LandingSection = ({
+  image,
   title,
   description,
   showVideo = false,
@@ -18,7 +20,7 @@ const LandingSection = ({
       sx={{
         position: "relative",
         height: { xs: "70vh", sm: "60vh", md: "80vh" }, // Responsive height
-        backgroundImage: showVideo ? "" : `url(${bg})`,
+        backgroundImage: showVideo ? "" : `url(${ image ?? bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

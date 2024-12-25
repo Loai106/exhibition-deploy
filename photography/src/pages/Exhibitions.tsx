@@ -1,10 +1,14 @@
 import { Grid2 as Grid, Box, Typography, Container } from "@mui/material";
 import useGetAllPainting from "../hooks/useGetAllPainting";
 import ImageCard from "../components/shared/ImageCard";
+import { useNavigate } from "react-router-dom";
 
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
-
+  const navigate = useNavigate();
+   const handleCardClick = (paintId: any) => {
+    navigate(`/exhibitions/${paintId}`, { state: { paintId } });
+  };
   return (
     <Container>
       <Typography

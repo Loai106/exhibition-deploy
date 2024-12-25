@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 
 const PageTitle = ({
   title,
-  subtitle,
   alignment = "center",
   sx,
 }: PageTitleProps) => {
@@ -11,50 +10,51 @@ const PageTitle = ({
     <Box
       sx={{
         textAlign: alignment,
-        margin: "20px 0",
-        padding: "20px",
+        margin: "40px",
+        padding: "20px 0",
+        position: "relative",
         ...sx?.container,
       }}
     >
+      <Divider
+        sx={{
+          position: "absolute",
+          top: "50%",
+          width: "100%",
+          transform: "translateY(-50%)",
+          height: "2px",
+          backgroundColor: "#e0e0e0",
+          zIndex: 1,
+        }}
+      />
       <Typography
-        variant="h3" // Adjusted variant for better responsiveness
+        variant="h3"
         component="h1"
         color="textSecondary"
         sx={{
           fontWeight: "bold",
-
-          margin: 0,
-          fontSize: { xs: "24px", sm: "32px", md: "40px" }, // Responsive font size
+          color: "black",
+          backgroundColor: "white",
+          padding: "0 16px",
+          display: "inline-block",
+          zIndex: 2,
+          position: "relative",
+          fontSize: { xs: "24px", sm: "32px", md: "40px" },
           ...sx?.title,
         }}
       >
         {title}
       </Typography>
-      {subtitle && (
-        <Typography
-          variant="body1" // Changed variant for better scaling
-          sx={{
-            color: "text.secondary",
-            marginTop: "5px",
-            fontSize: { xs: "14px", sm: "16px", md: "18px" }, // Responsive font size
-            ...sx?.subtitle,
-          }}
-        >
-          {subtitle}
-        </Typography>
-      )}
     </Box>
   );
 };
 
 interface PageTitleProps {
   title: string;
-  subtitle?: string;
   alignment?: "left" | "center" | "right";
   sx?: {
     container?: React.CSSProperties;
     title?: React.CSSProperties;
-    subtitle?: React.CSSProperties;
   };
 }
 
