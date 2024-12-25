@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,7 +13,6 @@ import Logo from "/images/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -41,12 +40,8 @@ const Navbar = () => {
     </List>
   );
 
-  // const appBarStyles = {
-  //   backgroundColor: "#005288",
-  // };
-
   const linkStyles = {
-    color: "white",
+    color: "black",
     textDecoration: "none",
     fontWeight: "700",
     fontSize: "18px",
@@ -54,26 +49,14 @@ const Navbar = () => {
   };
 
   const appBarStyles = {
-    backgroundColor: scrolled ? "#005288" : "transparent", // Dynamic background
+    backgroundColor: "#ffffff", // Dynamic background
     transition: "background-color 0.3s ease", // Smooth transition
-    boxShadow: scrolled ? "0 4px 10px rgba(0, 0, 0, 0.1)" : "none", // Optional shadow
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", // Optional shadow
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 400); // Change to true if scrolled more than 50px
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
-      <AppBar position="fixed" sx={appBarStyles}>
+      <AppBar position="static" sx={appBarStyles}>
         <Container>
           <Toolbar
             sx={{
@@ -81,7 +64,7 @@ const Navbar = () => {
               px: "0px !important",
               justifyContent: {
                 xs: "space-between",
-                md: "space-around",
+                md: "space-between",
               },
             }}
           >
@@ -91,6 +74,7 @@ const Navbar = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
+                ml: "-12px",
               }}
             >
               <Box
@@ -105,7 +89,7 @@ const Navbar = () => {
               <Typography
                 variant="h6"
                 sx={{
-                  color: "white",
+                  color: "black",
                   fontWeight: "bold",
                   fontSize: "20px",
                 }}
@@ -119,7 +103,7 @@ const Navbar = () => {
               color="inherit"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ display: { md: "none" } }}
+              sx={{ display: { md: "none" }, color: "black" }}
             >
               <MenuIcon />
             </IconButton>
@@ -128,7 +112,7 @@ const Navbar = () => {
             <Grid
               container
               sx={{
-                display: { xs: "none", md: "flex" },
+                display: { xs: "none", md: "flex", color: "black" },
                 justifyContent: "space-between",
               }}
             >
@@ -140,6 +124,11 @@ const Navbar = () => {
                 </Grid>
               ))}
             </Grid>
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+              }}
+            />
           </Toolbar>
         </Container>
       </AppBar>

@@ -19,9 +19,10 @@ const PageTitle = ({
       <Typography
         variant="h3" // Adjusted variant for better responsiveness
         component="h1"
+        color="textSecondary"
         sx={{
           fontWeight: "bold",
-          color: "#1a73e8",
+
           margin: 0,
           fontSize: { xs: "24px", sm: "32px", md: "40px" }, // Responsive font size
           ...sx?.title,

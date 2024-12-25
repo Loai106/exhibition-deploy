@@ -1,5 +1,5 @@
-import React from "react";
-import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Container, Grid2 as Grid, Skeleton } from "@mui/material";
 import PageTitle from "../shared/PageTitle";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel";
@@ -14,9 +14,40 @@ import img8 from "/images/img8.jpg";
 import img9 from "/images/img9.jpg";
 import img10 from "/images/img10.jpg";
 
-const workshops = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10];
+const workshops = [
+  { id: 1, src: img1 },
+  { id: 2, src: img2 },
+  { id: 3, src: img3 },
+  { id: 4, src: img4 },
+  { id: 5, src: img5 },
+  { id: 6, src: img6 },
+  { id: 7, src: img7 },
+  { id: 8, src: img8 },
+  { id: 9, src: img9 },
+  { id: 10, src: img10 },
+];
 
-const Workshops: React.FC = () => {
+const Workshops = () => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0); // Default to first image
+  const [loading, setLoading] = useState(true); // Simulate loading
+
+  const handleThumbnailClick = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
+  const handleSlideChange = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
+  // Simulate loading delay
+  React.useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000); // Simulated delay
+    return () => clearTimeout(timer);
+  }, []);
+
+  const getOptimizedImage = (url: string, width: number, height: number) =>
+    `${url}?w=${width}&h=${height}&fit=crop&auto=format&dpr=2`;
+
   return (
     <Box
       sx={{
@@ -26,62 +57,128 @@ const Workshops: React.FC = () => {
         color: "#333",
       }}
     >
-      <PageTitle title="Workshops" alignment="center" />
+      <Container>
+        {/* Title Section */}
+        <PageTitle title="Workshops" alignment="center" />
 
-      {/* Carousel Section */}
-      <Carousel
-        showThumbs={true}
-        infiniteLoop
-        autoPlay
-        interval={4000}
-        showStatus={true}
-        dynamicHeight={false}
-        thumbWidth={100} // Controls the width of thumbnails
-        renderThumbs={() =>
-          workshops.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              style={{
-                height: "60px", // Adjust thumbnail height
-                objectFit: "cover",
-                borderRadius: "8px",
-              }}
-            />
-          ))
-        }
-      >
-        {workshops.map((image, index) => (
-          <Box
-            key={index}
-            sx={{
-              bgcolor: "black",
-              borderRadius: "8px",
-            }}
-          >
+        {/* Main Image Carousel Section */}
+        <Carousel
+          selectedItem={selectedImageIndex}
+          onChange={handleSlideChange}
+          showThumbs={false}
+          infiniteLoop
+          autoPlay
+          interval={4000}
+          showStatus
+          dynamicHeight={false}
+          showIndicators={false}
+        >
+          {workshops.map((image) => (
             <Box
+              key={image.id}
               sx={{
-                width: "80%",
-                margin: "auto",
+                position: "relative",
+                overflow: "hidden",
+                background: "#000",
+                width: "100%",
               }}
             >
-              <Box
-                component="img"
-                src={image}
-                alt={`Workshop Image ${index + 1}`}
-                sx={{
-                  height: {
-                    xs: "40vh",
-                    sm: "60vh",
-                  },
-                  objectFit: "cover",
-                }}
-              />
+              {loading ? (
+                <Skeleton
+                  variant="rectangular"
+                  sx={{
+                    width: "70% !important",
+                    height: {
+                      xs: "40vh",
+                      sm: "60vh",
+                    },
+                    borderRadius: "8px",
+                  }}
+                />
+              ) : (
+                <img
+                  src={getOptimizedImage(image.src, 300, 200)}
+                  alt={`Thumbnail ${image.id}`}
+                  loading="lazy"
+                  style={{
+                    width: "80%",
+                    height: "60vh",
+                    objectFit: "cover",
+                    borderRadius: "4px",
+                  }}
+                />
+              )}
             </Box>
-          </Box>
-        ))}
-      </Carousel>
+          ))}
+        </Carousel>
+
+        {/* Thumbnails Section */}
+        <Grid container spacing={2} sx={{ mt: 3 }} justifyContent="center">
+          {loading
+            ? Array.from(new Array(10)).map((_, index) => (
+                <Grid
+                  size={{ xs: 3, sm: 2, md: 1 }}
+                  key={`skeleton-${index}`}
+                  sx={{
+                    borderRadius: "4px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Skeleton
+                    variant="rectangular"
+                    sx={{
+                      width: "100%",
+                      height: "60px",
+                      borderRadius: "4px",
+                    }}
+                  />
+                </Grid>
+              ))
+            : workshops.map((image, index) => (
+                <Grid
+                  size={{ xs: 3, sm: 2, md: 1 }}
+                  key={image.id}
+                  sx={{
+                    cursor: "pointer",
+                    border:
+                      selectedImageIndex === index
+                        ? "2px solid #1a73e8"
+                        : "none",
+                    borderRadius: "4px",
+                    overflow: "hidden",
+                  }}
+                  onClick={() => handleThumbnailClick(index)}
+                >
+                  {/* <Box
+                    component="img"
+                    src={image.src}
+                    alt={`Thumbnail ${image.id}`}
+                    sx={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                      transition: "transform 0.3s ease",
+                      ":hover": {
+                        transform: "scale(1.05)", // Slight zoom on hover
+                      },
+                    }}
+                  /> */}
+                  <img
+                    src={getOptimizedImage(image.src, 300, 200)}
+                    alt={`Thumbnail ${image.id}`}
+                    loading="lazy"
+                    style={{
+                      width: "100%",
+                      height: "60px",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                    }}
+                  />
+                </Grid>
+              ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };
