@@ -10,7 +10,7 @@ export const apiClient = axios.create({
 
 export const END_POINTS = {
   GET_ALL_ARTISTS: "/artists",
-  GET_ARTIST: "/artists",
+  GET_ARTIST: "/artist",
   GET_ALL_PAINTINGS: "/paintings",
   GET_PAINTING: "/paintings",
 };

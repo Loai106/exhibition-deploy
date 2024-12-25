@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
   const navigate = useNavigate();
-  const handleCardClick = (paintId: any) => {
+   const handleCardClick = (paintId: any) => {
     navigate(`/exhibitions/${paintId}`, { state: { paintId } });
   };
   return (
     <>
-      <LandingSection title="Exhibitions" />
+      <LandingSection title="Exhibitions"/>
       <Container maxWidth="xl">
         <Grid container spacing={4} sx={{ mb: 4, mt: 6, p: 0, width: "100%" }}>
           {isLoading ? (

@@ -7,22 +7,30 @@ import {
   Divider,
   Chip,
   Skeleton,
+  Button,
 } from "@mui/material";
-import LandingSection from "../components/shared/Landing";
+import { useLocation, useNavigate } from "react-router-dom";
 import useGetSinglePainting from "../hooks/useGetSinglePainting";
-import { useLocation } from "react-router-dom";
+import PageTitle from "../components/shared/PageTitle";
+import { useCallback, useMemo } from "react";
 
 const ExhibitionDetail = () => {
   const location = useLocation();
-  const { data: paintingData, isLoading } = useGetSinglePainting(
-    location.state.paintId
-  );
-  const artist = paintingData?.data?.artists[0];
+  const navigate = useNavigate();
+
+  const paintId = useMemo(() => location.state?.paintId, [location.state]);
+  const { data: paintingData, isLoading } = useGetSinglePainting(paintId);
+  const artist = useMemo(() => paintingData?.data?.artists[0], [paintingData]);
+
+  const handleReadMoreClick = useCallback(() => {
+    if (artist?.artist_id) {
+      navigate(`/artist/${artist.artist_id}`, { state: { artistId: artist.artist_id } });
+    }
+  }, [artist, navigate]);
 
   return (
     <>
-      <LandingSection image={paintingData?.data?.painting_url} />
-
+      <PageTitle title="Exhibitions" alignment="center" />
       <Box sx={{ padding: 4, backgroundColor: "#f9f9f9", flexGrow: 1 }}>
         <Grid container spacing={4} alignItems="center">
           {/* Left Section: Painting Image */}
@@ -144,6 +152,13 @@ const ExhibitionDetail = () => {
                   <Typography variant="body1" color="text.secondary">
                     {artist?.artistStory.substring(0, 300)}...
                   </Typography>
+                  <Button
+                    variant="text"
+                    sx={{ marginTop: 1 }}
+                    onClick={() => handleReadMoreClick(artist?.artist_id)}
+                  >
+                    Read More
+                  </Button>
                 </Paper>
               </>
             )}
