@@ -30,6 +30,7 @@ const PageTitle = ({
       <Typography
         variant="h3"
         component="h1"
+        color="textSecondary"
         sx={{
           fontWeight: "bold",
           color: "black",

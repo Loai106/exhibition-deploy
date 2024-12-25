@@ -37,7 +37,6 @@ const ImageCard = ({
           sx={{
             width: "100%",
             height: "300px",
-            borderRadius: 2,
             mb: 2,
           }}
         />
@@ -47,7 +46,6 @@ const ImageCard = ({
           sx={{
             position: "relative",
             width: "100%",
-            borderRadius: 3,
             height: {
               xs: "200px",
               md: "250px",

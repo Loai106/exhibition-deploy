@@ -36,9 +36,9 @@ const About = () => {
           <Typography
             variant="h4"
             gutterBottom
+            color="textSecondary"
             sx={{
               fontWeight: "bold",
-              color: "#1a73e8",
               display: "inline",
             }}
           >

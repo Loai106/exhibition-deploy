@@ -11,16 +11,19 @@ const Footer = () => {
         marginTop: "auto",
       }}
     >
-      <Container>
+      <Container maxWidth="lg">
         <Grid container spacing={4}>
           {/* Section 1: About */}
           <Grid size={{ xs: 12, sm: 4 }}>
             <Typography variant="h6" gutterBottom>
-              About Us
+              <Link href="/about" color="inherit" underline="hover">
+                About Us
+              </Link>
             </Typography>
             <Typography variant="body2">
-              We are committed to providing the best service and resources to
-              our customers. Contact us for more information.
+              Welcome to our photography world! Here, we believe that every
+              picture tells a story. Our mission is to capture the beauty of
+              life and the essence of emotions through our lens.
             </Typography>
           </Grid>
 
@@ -46,11 +49,11 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom>
               Contact Us
             </Typography>
-            <Typography variant="body2">
+            {/* <Typography variant="body2">
               Email: support@example.com
               <br />
               Phone: +1 123-456-7890
-            </Typography>
+            </Typography> */}
           </Grid>
         </Grid>
 
