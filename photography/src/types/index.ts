@@ -33,6 +33,7 @@ export interface Artist {
   createdAt: string; // ISO string format
   updatedAt: string; // ISO string format
   paintings: Painting[]; // Array of paintings
+  age: number; // Age of the artist
 }
 
 export interface Painting {

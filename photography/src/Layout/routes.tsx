@@ -29,7 +29,7 @@ const Routes = () => {
         },
 
         {
-          path: "/artist",
+          path: "/artists",
           element: <Artists />,
         },
         {

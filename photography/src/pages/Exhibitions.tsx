@@ -2,26 +2,23 @@ import { Grid2 as Grid, Box, Typography, Container } from "@mui/material";
 import useGetAllPainting from "../hooks/useGetAllPainting";
 import ImageCard from "../components/shared/ImageCard";
 import { useNavigate } from "react-router-dom";
+import PageTitle from "../components/shared/PageTitle";
+import { useRef } from "react";
 
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
+  const firstTimeRef = useRef(true);
   const navigate = useNavigate();
-   const handleCardClick = (paintId: any) => {
-    navigate(`/exhibitions/${paintId}`, { state: { paintId } });
+
+  const handleCardClick = (paintId: string | number) => {
+    if (firstTimeRef.current) {
+      firstTimeRef.current = false;
+      navigate(`/exhibitions/${paintId}`, { state: { paintId } });
+    }
   };
   return (
     <Container>
-      <Typography
-        variant="h3"
-        sx={{
-          mt: 3,
-          fontWeight: "bold",
-          color: "black",
-          borderBottom: "1px solid #d8d8d9",
-        }}
-      >
-        Exhibitions
-      </Typography>
+      <PageTitle title="Exhibitions" alignment="center" />
 
       <Grid container spacing={4} sx={{ mb: 4, mt: 6, p: 0, width: "100%" }}>
         {isLoading ? (
@@ -40,6 +37,7 @@ const Exhibitions = () => {
                   painting.artists[0]?.lastName || "--"
               }
               loading={false}
+              onClick={() => handleCardClick(painting.painting_id)}
             />
           ))
         ) : (

@@ -5,13 +5,13 @@ const PageTitle = ({
   title,
   alignment = "center",
   sx,
+  background,
 }: PageTitleProps) => {
   return (
     <Box
       sx={{
         textAlign: alignment,
-        margin: "40px",
-        padding: "20px 0",
+        my: "40px",
         position: "relative",
         ...sx?.container,
       }}
@@ -23,7 +23,6 @@ const PageTitle = ({
           width: "100%",
           transform: "translateY(-50%)",
           height: "2px",
-          backgroundColor: "#e0e0e0",
           zIndex: 1,
         }}
       />
@@ -34,7 +33,7 @@ const PageTitle = ({
         sx={{
           fontWeight: "bold",
           color: "black",
-          backgroundColor: "white",
+          backgroundColor: background ?? "white",
           padding: "0 16px",
           display: "inline-block",
           zIndex: 2,
@@ -56,6 +55,7 @@ interface PageTitleProps {
     container?: React.CSSProperties;
     title?: React.CSSProperties;
   };
+  background?: string;
 }
 
 export default PageTitle;

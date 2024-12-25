@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -13,6 +13,7 @@ import Logo from "/images/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -76,6 +77,7 @@ const Navbar = () => {
                 gap: 1,
                 ml: "-12px",
               }}
+              onClick={() => navigate("/")}
             >
               <Box
                 component="img"
@@ -92,6 +94,7 @@ const Navbar = () => {
                   color: "black",
                   fontWeight: "bold",
                   fontSize: "20px",
+                  cursor: "pointer",
                 }}
               >
                 Life Canvas

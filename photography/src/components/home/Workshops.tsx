@@ -59,7 +59,7 @@ const Workshops = () => {
     >
       <Container>
         {/* Title Section */}
-        <PageTitle title="Workshops" alignment="center" />
+        <PageTitle title="Workshops" alignment="center" background="#f9f9f9" />
 
         {/* Main Image Carousel Section */}
         <Carousel

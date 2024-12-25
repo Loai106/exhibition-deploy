@@ -65,18 +65,7 @@ const About = () => {
           >
             {aboutText}
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={toggleReadMore}
-            sx={{
-              mt: 2,
-              backgroundColor: "#1a73e8",
-              "&:hover": {
-                backgroundColor: "#1558b0",
-              },
-            }}
-          >
+          <Button variant="text" color="primary" onClick={toggleReadMore}>
             Read More
           </Button>
         </Grid>
