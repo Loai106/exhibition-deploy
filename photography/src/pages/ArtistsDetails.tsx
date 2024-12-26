@@ -121,7 +121,7 @@ const ArtistDetail = () => {
 
       {/* Exhibitions Section */}
       <Box>
-        <PageTitle title="Exhibitions" />
+        <PageTitle title="Works" />
 
         <Grid container spacing={4}>
           {isFetching

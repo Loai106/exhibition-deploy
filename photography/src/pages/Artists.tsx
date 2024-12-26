@@ -43,7 +43,8 @@ const Artists = () => {
           sx={{
             ...gridStyles[index],
             backgroundColor: "#f0f0f0",
-            overflow: "hidden",
+            // overflow: "hidden",
+            maxHeight: "100%",
           }}
         >
           <Skeleton
@@ -65,6 +66,9 @@ const Artists = () => {
         sx={{
           ...gridStyles[index],
           position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           overflow: "hidden",
           cursor: "pointer",
         }}
@@ -99,6 +103,7 @@ const Artists = () => {
             left: 0,
             width: "100%",
             height: "100%",
+
             backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay
             opacity: 0, // Hidden by default
             transition: "opacity 0.3s ease",
@@ -149,7 +154,7 @@ const Artists = () => {
         autoPlay
         selectedItem={selectedImageIndex}
         onChange={handleSlideChange}
-        interval={4000}
+        interval={5000}
         showStatus={false}
         dynamicHeight={false}
       >
@@ -159,7 +164,7 @@ const Artists = () => {
               sx={{
                 display: "grid",
                 gridTemplateColumns: "repeat(11, 1fr)", // 11 columns
-                gridAutoRows: "minmax(150px, auto)", // Dynamic rows
+                gridTemplateRows: "repeat(6, 1fr)", // Dynamic rows
                 gap: 2,
                 mt: 6,
                 height: "100vh",

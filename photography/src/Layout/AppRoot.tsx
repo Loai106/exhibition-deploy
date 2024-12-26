@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Stack } from "@mui/material";
 import { useEffect } from "react";
+
 export default function AppRoot() {
   const { pathname } = useLocation();
 
