@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import  { useState } from "react";
 import { Box, Container, Typography, Skeleton } from "@mui/material";
 import PageTitle from "../components/shared/PageTitle";
 import useGetAllArtists from "../hooks/useGetAllArtists";

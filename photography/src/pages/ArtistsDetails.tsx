@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Box, Typography, Grid, Container, Button } from "@mui/material";
 import useGetSingleArtist from "../hooks/useGetSingleArtist";
 import { useMemo } from "react";
