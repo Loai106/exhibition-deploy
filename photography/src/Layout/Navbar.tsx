@@ -9,7 +9,6 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemButton, Box, Typography, Container } from "@mui/material";
-import Logo from "/images/logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -19,7 +18,7 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Exhibitions", path: "/exhibitions" },
     { label: "Artists", path: "/artists" },
-    { label: "About", path: "/about" },
+    // { label: "About", path: "/about" },
   ];
 
   const handleDrawerToggle = () => {
@@ -42,17 +41,21 @@ const Navbar = () => {
   );
 
   const linkStyles = {
-    color: "black",
     textDecoration: "none",
-    fontWeight: "700",
-    fontSize: "18px",
-    padding: "0 1rem",
+    color: "rgb(178, 178, 178)",
+    fontSize: "16px",
+    padding: "5px 10px",
+    transition: "color 0.3s ease",
+    "&:hover": {
+      color: "black",
+    },
   };
 
   const appBarStyles = {
     backgroundColor: "#ffffff", // Dynamic background
     transition: "background-color 0.3s ease", // Smooth transition
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", // Optional shadow
+    boxShadow: "none",
+    borderBottom: "1px solid rgb(190, 188, 188)",
   };
 
   return (
@@ -65,7 +68,7 @@ const Navbar = () => {
               px: "0px !important",
               justifyContent: {
                 xs: "space-between",
-                md: "space-between",
+                md: "flex-start",
               },
             }}
           >
@@ -79,7 +82,7 @@ const Navbar = () => {
               }}
               onClick={() => navigate("/")}
             >
-              <Box
+              {/* <Box
                 component="img"
                 src={Logo}
                 alt="Life Canvas Logo"
@@ -87,7 +90,7 @@ const Navbar = () => {
                   width: 70,
                   height: "auto",
                 }}
-              />
+              /> */}
               <Typography
                 variant="h6"
                 sx={{
@@ -121,8 +124,8 @@ const Navbar = () => {
             >
               {navItems.map((item) => (
                 <Grid key={item.label}>
-                  <Link to={item.path} style={linkStyles}>
-                    {item.label}
+                  <Link to={item.path} style={{ textDecoration: "none" }}>
+                    <Box sx={linkStyles}>{item.label}</Box>
                   </Link>
                 </Grid>
               ))}

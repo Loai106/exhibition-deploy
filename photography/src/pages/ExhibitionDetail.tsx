@@ -3,13 +3,10 @@ import {
   Grid2 as Grid,
   Typography,
   Avatar,
-  Paper,
   Divider,
-  Chip,
-  Skeleton,
   Button,
   Container,
-  Stack,
+  Skeleton,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import useGetSinglePainting from "../hooks/useGetSinglePainting";
@@ -35,156 +32,112 @@ const ExhibitionDetail = () => {
 
   return (
     <Container sx={{ mb: 4 }}>
-      <PageTitle title="Exhibition" alignment="center" />
-      {/* <Box sx={{ padding: 4, backgroundColor: "#f9f9f9", flexGrow: 1 }}> */}
-      <Grid container spacing={4} alignItems="center">
-        {/* Left Section: Painting Image */}
+      <PageTitle title="Exhibition Details" alignment="center" />
+      <Grid container spacing={4} alignItems="flex-start" sx={{ mt: 4 }}>
+        {/* Painting Section */}
         <Grid size={{ xs: 12, md: 6 }}>
           {isFetching ? (
             <Skeleton
               variant="rectangular"
               sx={{
                 width: "100%",
-                height: "600px",
-                borderRadius: 2,
+                height: "400px",
               }}
             />
           ) : (
             <Box
               sx={{
+                width: "100%",
+                height: "auto",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 3,
-                overflow: "hidden",
-                boxShadow: 4,
-                backgroundColor: "red",
-                flex: 1,
               }}
             >
-              <img
+              <Box
+                component="img"
                 src={paintingData?.data?.painting_url}
                 alt={paintingData?.data?.paintingName}
-                style={{
+                sx={{
                   width: "100%",
+                  maxHeight: "400px",
                   objectFit: "contain",
-                  borderRadius: "8px",
                 }}
               />
             </Box>
           )}
         </Grid>
 
-        {/* Right Section: Description and Artist Details */}
+        {/* Details Section */}
         <Grid size={{ xs: 12, md: 6 }}>
           {isFetching ? (
-            <Stack gap={3}>
-              <Skeleton
-                variant="rectangular"
-                sx={{
-                  width: "100%",
-                  height: "300px",
-                  borderRadius: 2,
-                }}
-              />
-              <Skeleton
-                variant="rectangular"
-                sx={{
-                  width: "100%",
-                  height: "300px",
-                  borderRadius: 2,
-                }}
-              />
-            </Stack>
-          ) : (
-            <Stack
-              spacing={3}
+            <Skeleton
+              variant="rectangular"
               sx={{
-                height: "100%",
+                width: "100%",
+                height: "200px",
               }}
-            >
-              {/* Painting Description */}
-              <Paper
+            />
+          ) : (
+            <Box sx={{ width: "100%" }}>
+              <Typography variant="h4" gutterBottom>
+                {paintingData?.data?.paintingName}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {paintingData?.data?.description}
+              </Typography>
+              <Typography variant="body2" sx={{ color: "gray", mt: 2, mb: 1 }}>
+                Dimensions: {paintingData?.data?.height} cm x{" "}
+                {paintingData?.data?.width} cm
+              </Typography>
+              <Typography variant="body2" sx={{ color: "gray", mb: 2 }}>
+                Created on:{" "}
+                {new Date(paintingData?.data?.date ?? "").toDateString()}
+              </Typography>
+              <Divider sx={{ my: 3 }} />
+              <Typography variant="h5" gutterBottom>
+                Artist Information
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Avatar
+                  src={artist?.artistPic}
+                  alt={`${artist?.firstName} ${artist?.lastName}`}
+                  sx={{ width: 64, height: 64 }}
+                />
+                <Box>
+                  <Typography variant="body1" fontWeight="bold">
+                    {artist?.firstName} {artist?.lastName}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    From: {artist?.pob}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Age: {artist?.age}
+                  </Typography>
+                </Box>
+              </Box>
+              <Typography variant="body2" sx={{ color: "gray", mt: 3 }}>
+                {artist?.artistStory.substring(0, 150)}...
+              </Typography>
+              <Button
+                variant="outlined"
                 sx={{
-                  padding: 3,
-                  borderRadius: 3,
-                  boxShadow: 4,
-                  backgroundColor: "#ffffff",
-                  marginBottom: 3,
-                  flex: 1,
+                  mt: 2,
+                  color: "black", // Text color
+                  borderColor: "gray", // Border color
+                  "&:hover": {
+                    backgroundColor: "lightgray", // Hover background color
+                    borderColor: "black", // Hover border color
+                  },
                 }}
+                onClick={handleReadMoreClick}
               >
-                <Typography variant="h4" gutterBottom>
-                  {paintingData?.data?.paintingName}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" gutterBottom>
-                  {paintingData?.data?.description}
-                </Typography>
-                <Divider sx={{ marginY: 2 }} />
-                <Typography variant="body2" color="text.secondary">
-                  <Chip
-                    label={`Height: ${paintingData?.data?.height} cm`}
-                    sx={{ mr: 1 }}
-                  />
-                  <Chip label={`Width: ${paintingData?.data?.width} cm`} />
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ marginTop: 2 }}
-                >
-                  Created on:{" "}
-                  {new Date(paintingData?.data?.date ?? "--").toDateString()}
-                </Typography>
-              </Paper>
-
-              {/* Artist Details */}
-              <Paper
-                sx={{
-                  padding: 3,
-                  borderRadius: 3,
-                  boxShadow: 4,
-                  backgroundColor: "#ffffff",
-                  flex: 1,
-                }}
-              >
-                <Grid container spacing={2} alignItems="center">
-                  <Grid>
-                    <Avatar
-                      src={artist?.artistPic}
-                      alt={`${artist?.firstName} ${artist?.lastName}`}
-                      sx={{ width: 80, height: 80 }}
-                    />
-                  </Grid>
-                  <Grid>
-                    <Typography variant="h5">
-                      {artist?.firstName} {artist?.lastName}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      From: {artist?.pob}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Age: {artist?.age}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Divider sx={{ marginY: 2 }} />
-                <Typography variant="body1" color="text.secondary">
-                  {artist?.artistStory.substring(0, 300)}...
-                </Typography>
-                <Button
-                  variant="text"
-                  sx={{ marginTop: 1 }}
-                  onClick={handleReadMoreClick}
-                >
-                  Read More
-                </Button>
-              </Paper>
-            </Stack>
+                Read More About Artist
+              </Button>
+            </Box>
           )}
         </Grid>
       </Grid>
-      {/* </Box> */}
     </Container>
   );
 };

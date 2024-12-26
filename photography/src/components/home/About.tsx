@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -5,7 +6,6 @@ import {
   Grid2 as Grid,
   Container,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const aboutText = `
 Amid the rubble of war and the echoes of explosions, the colors of hope emerged in the "Life Canvas: Insights from Gaza" exhibition. Here, suffering transformed into creativity, and pain turned into stories told through the strokes of a paintbrush.
@@ -15,13 +15,22 @@ The exhibition features the works of 29 Palestinian artists, each of whom used t
 
 Some of the paintings combined images of destruction with symbols of hope, such as green wheat stalks sprouting from rubble and trees emerging from beneath the ruins, reflecting the enduring spirit of life despite the devastation.
 
-While dark`;
+While dark, somber colors dominated the majority of the works, they were not devoid of vibrant hues that symbolized persistence and determination. Paintings illustrated the harsh realities of daily life under siege, from families lining up for bread to those waiting for water, echoing the relentless struggle of Gaza's people.
+
+"Life Canvas: Insights from Gaza" is more than an exhibition; it is a message from Gaza to the world. It is a declaration that creativity endures, even in the darkest of times. Each corner of the exhibition tells tales of hope and resilience, shared through the colors and brushstrokes of its artists.
+
+Enjoy the beauty of their creations and support them so they can continue to nurture hope. Your support empowers these artists to keep drawing, creating, and sharing their stories. 
+Supporting art is supporting life itself.
+Heyam Al-Hayek
+General Director, 
+Spark for Innovation and Creativity
+`;
 
 const About = () => {
-  const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
 
   const toggleReadMore = () => {
-    navigate("/about");
+    setExpanded(!expanded);
   };
 
   return (
@@ -31,7 +40,7 @@ const About = () => {
         color: "#333",
       }}
     >
-      <Grid container spacing={4} alignItems="center" py={8}>
+      <Grid container spacing={4} alignItems="start" py={8}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography
             variant="h4"
@@ -49,7 +58,7 @@ const About = () => {
             gutterBottom
             sx={{ fontWeight: "bold", display: "inline" }}
           >
-            Life Canvas
+            Life Canvas: Insights from Gaza – Where Art Reflects Life
           </Typography>
           <Typography
             variant="body1"
@@ -57,16 +66,20 @@ const About = () => {
             sx={{
               mt: 2,
               display: "-webkit-box",
-              WebkitLineClamp: 8,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              WebkitLineClamp: expanded ? "none" : 8, // Toggle full or truncated text
+              WebkitBoxOrient: expanded ? "unset" : "vertical",
+              overflow: expanded ? "visible" : "hidden",
+              textOverflow: expanded ? "unset" : "ellipsis",
             }}
           >
             {aboutText}
           </Typography>
-          <Button variant="text" color="primary" onClick={toggleReadMore}>
-            Read More
+          <Button
+            variant="text"
+            sx={{ color: "gray" }}
+            onClick={toggleReadMore}
+          >
+            {expanded ? "Read Less" : "Read More"}
           </Button>
         </Grid>
 
