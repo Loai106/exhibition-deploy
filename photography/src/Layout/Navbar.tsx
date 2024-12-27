@@ -18,6 +18,10 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Exhibition", path: "/exhibitions" },
     { label: "Artists", path: "/artists" },
+    { label :"Virtual Gallery", path:"https://publish.exhibbit.com/gallery/178300305673707836/marble-gallery-126570/?v=20241227032001",styles:{padding:"5px 10px ", borderRadius:"4px",border:"1px solid black" ,color:"rgb(178, 178, 178)",transition: "color 0.3s ease",
+      "&:hover": {
+        color: "black",
+      },}}
     // { label: "About", path: "/about" },
   ];
 
@@ -125,7 +129,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <Grid key={item.label}>
                   <Link to={item.path} style={{ textDecoration: "none" }}>
-                    <Box sx={linkStyles}>{item.label}</Box>
+                    <Box sx={item.styles?item.styles:linkStyles}>{item.label}</Box>
                   </Link>
                 </Grid>
               ))}
