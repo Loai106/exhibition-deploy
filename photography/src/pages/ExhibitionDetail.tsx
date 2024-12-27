@@ -32,7 +32,7 @@ const ExhibitionDetail = () => {
 
   return (
     <Container sx={{ mb: 4 }}>
-      <PageTitle title="Works" alignment="center" />
+      <PageTitle title="Art" alignment="center" />
       <Grid container spacing={4} alignItems="flex-start" sx={{ mt: 4 }}>
         {/* Painting Section */}
         <Grid size={{ xs: 12, md: 6 }}>

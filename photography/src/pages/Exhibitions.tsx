@@ -18,7 +18,7 @@ const Exhibitions = () => {
   };
   return (
     <Container>
-      <PageTitle title="Exhibitions" alignment="center" />
+      <PageTitle title="Exhibition" alignment="center" />
 
       <Grid container spacing={4} sx={{ mb: 4, mt: 6, p: 0, width: "100%" }}>
         {isLoading ? (
