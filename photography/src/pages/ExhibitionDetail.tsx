@@ -32,7 +32,7 @@ const ExhibitionDetail = () => {
 
   return (
     <Container sx={{ mb: 4 }}>
-      <PageTitle title="Exhibition Details" alignment="center" />
+      <PageTitle title="Works" alignment="center" />
       <Grid container spacing={4} alignItems="flex-start" sx={{ mt: 4 }}>
         {/* Painting Section */}
         <Grid size={{ xs: 12, md: 6 }}>
@@ -96,7 +96,7 @@ const ExhibitionDetail = () => {
               </Typography>
               <Divider sx={{ my: 3 }} />
               <Typography variant="h5" gutterBottom>
-                Artist Information
+                Artist
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Avatar
