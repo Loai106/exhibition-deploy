@@ -34,78 +34,75 @@ const About = () => {
   };
 
   return (
-    <Container
-      sx={{
-        backgroundColor: "#fff",
-        color: "#333",
-      }}
-    >
-      <Grid container spacing={4} alignItems="start" py={8}>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            color="textSecondary"
-            sx={{
-              fontWeight: "bold",
-              display: "inline",
-            }}
-          >
-            About{" "}
-          </Typography>
-          <Typography
-            variant="h4"
-            gutterBottom
-            sx={{ fontWeight: "bold", display: "inline" }}
-          >
-            Life Canvas: Insights from Gaza – Where Art Reflects Life
-          </Typography>
-          <Typography
-            variant="body1"
-            paragraph
-            sx={{
-              mt: 2,
-              display: "-webkit-box",
-              WebkitLineClamp: expanded ? "none" : 8, // Toggle full or truncated text
-              WebkitBoxOrient: expanded ? "unset" : "vertical",
-              overflow: expanded ? "visible" : "hidden",
-              textOverflow: expanded ? "unset" : "ellipsis",
-            }}
-          >
-            {aboutText}
-          </Typography>
-          <Button
-            variant="text"
-            sx={{ color: "gray" }}
-            onClick={toggleReadMore}
-          >
-            {expanded ? "Read Less" : "Read More"}
-          </Button>
-        </Grid>
+    <Box sx={{ backgroundColor: "#f9f9f9", color: "#333" }}>
+      <Container>
+        <Grid container spacing={4} alignItems="start" py={8}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              color="textSecondary"
+              sx={{
+                fontWeight: "bold",
+                display: "inline",
+              }}
+            >
+              About{" "}
+            </Typography>
+            <Typography
+              variant="h4"
+              gutterBottom
+              sx={{ fontWeight: "bold", display: "inline" }}
+            >
+              Life Canvas: Insights from Gaza – Where Art Reflects Life
+            </Typography>
+            <Typography
+              variant="body1"
+              paragraph
+              sx={{
+                mt: 2,
+                display: "-webkit-box",
+                WebkitLineClamp: expanded ? "none" : 8, // Toggle full or truncated text
+                WebkitBoxOrient: expanded ? "unset" : "vertical",
+                overflow: expanded ? "visible" : "hidden",
+                textOverflow: expanded ? "unset" : "ellipsis",
+              }}
+            >
+              {aboutText}
+            </Typography>
+            <Button
+              variant="text"
+              sx={{ color: "gray" }}
+              onClick={toggleReadMore}
+            >
+              {expanded ? "Read Less" : "Read More"}
+            </Button>
+          </Grid>
 
-        <Grid
-          size={{
-            xs: 12,
-            md: 6,
-          }}
-        >
-          <Box
-            component="iframe"
-            src="https://www.youtube.com/embed/SqMg3_OmXSA?autoplay=1&mute=1"
-            title="Spark Exhibition Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            sx={{
-              width: "100%",
-              height: "315px",
-              borderRadius: "8px",
-              boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
-              border: "none",
+          <Grid
+            size={{
+              xs: 12,
+              md: 6,
             }}
-          />
+          >
+            <Box
+              component="iframe"
+              src="https://www.youtube.com/embed/SqMg3_OmXSA?autoplay=1&mute=1"
+              title="Spark Exhibition Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              sx={{
+                width: "100%",
+                height: "315px",
+                borderRadius: "8px",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+                border: "none",
+              }}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

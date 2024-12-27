@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -18,11 +18,23 @@ const Navbar = () => {
     { label: "Home", path: "/" },
     { label: "Exhibition", path: "/exhibitions" },
     { label: "Artists", path: "/artists" },
-    { label :"Virtual Gallery", path:"https://publish.exhibbit.com/gallery/178300305673707836/marble-gallery-126570/?v=20241227032001",styles:{padding:"5px 10px ", borderRadius:"4px",border:"1px solid black" ,color:"rgb(178, 178, 178)",transition: "color 0.3s ease",
-      "&:hover": {
-        color: "black",
-      },}}
-    // { label: "About", path: "/about" },
+    {
+      id: 4,
+      label: "Virtual Gallery",
+      path: "https://publish.exhibbit.com/gallery/178300305673707836/marble-gallery-126570/?v=20241227032001",
+      styles: {
+        padding: "3px 6px ",
+        borderRadius: "4px",
+        mx: "30px",
+        fontSize: "14px",
+        border: "1px solid black",
+        color: "rgb(178, 178, 178)",
+        transition: "color 0.3s ease",
+        "&:hover": {
+          color: "black",
+        },
+      },
+    },
   ];
 
   const handleDrawerToggle = () => {
@@ -33,10 +45,11 @@ const Navbar = () => {
     <List>
       {navItems.map((item) => (
         <ListItemButton
-          component={Link}
+          component={NavLink}
           to={item.path}
           key={item.label}
           onClick={handleDrawerToggle}
+          target={item.id === 4 ? "_blank" : ""}
         >
           <ListItemText primary={item.label} />
         </ListItemButton>
@@ -46,20 +59,19 @@ const Navbar = () => {
 
   const linkStyles = {
     textDecoration: "none",
-    color: "rgb(178, 178, 178)",
-    fontSize: "16px",
+    fontSize: "14px",
     padding: "5px 10px",
-    transition: "color 0.3s ease",
     "&:hover": {
       color: "black",
     },
   };
 
   const appBarStyles = {
-    backgroundColor: "#ffffff", // Dynamic background
-    transition: "background-color 0.3s ease", // Smooth transition
+    backgroundColor: "#ffffff",
+    transition: "background-color 0.3s ease",
     boxShadow: "none",
     borderBottom: "1px solid rgb(190, 188, 188)",
+    height: "50px",
   };
 
   return (
@@ -69,38 +81,27 @@ const Navbar = () => {
           <Toolbar
             sx={{
               gap: 16,
-              px: "0px !important",
+              height: "50px", // Set height of the Toolbar
+              minHeight: "50px !important", // Ensure minHeight for consistency
               justifyContent: {
                 xs: "space-between",
                 md: "flex-start",
               },
             }}
           >
-            {/* Logo with Text */}
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: 1,
-                ml: "-12px",
+                gap: 4,
               }}
               onClick={() => navigate("/")}
             >
-              {/* <Box
-                component="img"
-                src={Logo}
-                alt="Life Canvas Logo"
-                sx={{
-                  width: 70,
-                  height: "auto",
-                }}
-              /> */}
               <Typography
-                variant="h6"
                 sx={{
                   color: "black",
                   fontWeight: "bold",
-                  fontSize: "20px",
+                  fontSize: "16px",
                   cursor: "pointer",
                 }}
               >
@@ -125,12 +126,22 @@ const Navbar = () => {
                 display: { xs: "none", md: "flex", color: "black" },
                 justifyContent: "space-between",
               }}
+              gap={2}
             >
               {navItems.map((item) => (
                 <Grid key={item.label}>
-                  <Link to={item.path} style={{ textDecoration: "none" }}>
-                    <Box sx={item.styles?item.styles:linkStyles}>{item.label}</Box>
-                  </Link>
+                  <NavLink
+                    to={item.path}
+                    target={item.id === 4 ? "_blank" : ""}
+                    style={({ isActive }) => ({
+                      ...(item.styles ? item.styles : linkStyles),
+                      textDecoration: "none",
+                      color: isActive ? "black" : "rgb(178, 178, 178)",
+                      fontWeight: isActive ? "bold" : "normal",
+                    })}
+                  >
+                    {item.label}
+                  </NavLink>
                 </Grid>
               ))}
             </Grid>

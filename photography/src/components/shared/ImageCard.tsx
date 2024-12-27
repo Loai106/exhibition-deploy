@@ -69,6 +69,7 @@ const ImageCard = ({
           {/* Image */}
           <Box
             component="img"
+            loading="lazy"
             src={image}
             alt={title}
             sx={{

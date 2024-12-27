@@ -51,15 +51,15 @@ const Workshops = () => {
   return (
     <Box
       sx={{
-        py: 8,
+        py: 2,
+        PB: 4,
         px: { xs: 3, md: 8 },
-        backgroundColor: "#f9f9f9",
         color: "#333",
       }}
     >
       <Container>
         {/* Title Section */}
-        <PageTitle title="Workshops" alignment="center" background="#f9f9f9" />
+        <PageTitle title="Workshops" alignment="center" />
 
         {/* Main Image Carousel Section */}
         <Carousel
