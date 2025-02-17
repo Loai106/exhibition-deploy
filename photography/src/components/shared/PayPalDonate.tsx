@@ -31,6 +31,7 @@ const PayPalDonate = ({ open, handleClose, paintingId }: PayPalDonateProps) => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isEmailValid = emailRegex.test(email);
+  const isNameValid = name.trim() !== "";
   const isFormValid = name.trim() !== "" && isEmailValid && amount > 0;
 
   return (
@@ -78,10 +79,7 @@ const PayPalDonate = ({ open, handleClose, paintingId }: PayPalDonateProps) => {
                 label="Your Name"
                 variant="outlined"
                 fullWidth
-                error={!isFormValid && name.trim() !== ""}
-                helperText={
-                  !isFormValid && name.trim() !== "" ? "Name is required" : ""
-                }
+                helperText={!isNameValid ? "Name is required" : ""}
                 sx={{ borderRadius: "8px" }}
                 value={name}
                 onChange={(e) => setName(e.target.value)}

@@ -2,6 +2,9 @@ import axios from "axios";
 
 export const BASE_URL = "https://exhibition-mwpg.onrender.com/api";
 
+export const CLIENT_ID_PAYPAL =
+  "AUXZTI3bGgUWRoPA7pYxJ_ui-MavozqGjvHgAeob-vRS2UKNbyZJoqcXix0WWgnUUsjppDrKBkfGAS3w";
+
 export const apiClient = axios.create({
   baseURL: BASE_URL,
   timeout: 5000, // 5 seconds timeout
