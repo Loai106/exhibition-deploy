@@ -3,10 +3,12 @@ import useGetAllPainting from "../hooks/useGetAllPainting";
 import ImageCard from "../components/shared/ImageCard";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "../components/shared/PageTitle";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import PayPalDonate from "../components/shared/PayPalDonate";
 
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
+  const [openPayPal, setOpenPayPal] = useState<string | undefined>();
   const firstTimeRef = useRef(true);
   const navigate = useNavigate();
 
@@ -16,9 +18,14 @@ const Exhibitions = () => {
       navigate(`/exhibitions/${paintId}`, { state: { paintId } });
     }
   };
+
+  const handleSupportClick = (paintId: string | number) => {
+    setOpenPayPal(paintId.toString());
+  };
+
   return (
-    <Container maxWidth="xl">
-      <PageTitle title="Exhibition" alignment="center" />
+    <Container>
+      <PageTitle title="Exhibitions" alignment="center" />
 
       <Grid container spacing={4} sx={{ mb: 4, mt: 6, p: 0, width: "100%" }}>
         {isLoading ? (
@@ -31,13 +38,12 @@ const Exhibitions = () => {
               key={painting.painting_id}
               image={painting.painting_url}
               title={painting.paintingName}
-              desc={
-                painting.artists[0]?.firstName +
-                  " " +
-                  painting.artists[0]?.lastName || "--"
-              }
+              desc={`${painting.artists[0]?.firstName} ${
+                painting.artists[0]?.lastName || "--"
+              }`}
               loading={false}
               onClick={() => handleCardClick(painting.painting_id)}
+              onSupportClick={() => handleSupportClick(painting.painting_id)}
             />
           ))
         ) : (
@@ -58,6 +64,11 @@ const Exhibitions = () => {
           </Box>
         )}
       </Grid>
+      <PayPalDonate
+        open={!!openPayPal}
+        handleClose={() => setOpenPayPal(undefined)}
+        paintingId={openPayPal || ""}
+      />
     </Container>
   );
 };

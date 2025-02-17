@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://exhibition.onrender.com/api";
+export const BASE_URL = "https://exhibition-mwpg.onrender.com/api";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,

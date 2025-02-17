@@ -1,4 +1,11 @@
-import { Box, Typography, Skeleton, Grid2 as Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Skeleton,
+  Grid2 as Grid,
+  Button,
+} from "@mui/material";
+import { useState } from "react";
 
 const ImageCard = ({
   image,
@@ -7,7 +14,10 @@ const ImageCard = ({
   loading,
   key,
   onClick,
+  onSupportClick,
 }: ImageCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <Grid
       size={{
@@ -24,11 +34,11 @@ const ImageCard = ({
         color: "inherit",
         transition: "color 0.3s ease",
         ":hover, :focus-within": {
-          color: "#1a73e8",
+          color: "#FFB400",
         },
       }}
       onClick={onClick}
-      tabIndex={0} // Make grid focusable for mobile hover effect
+      tabIndex={0}
       key={key}
     >
       {loading ? (
@@ -42,7 +52,8 @@ const ImageCard = ({
         />
       ) : (
         <Box
-          onClick={onClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           sx={{
             position: "relative",
             width: "100%",
@@ -55,21 +66,32 @@ const ImageCard = ({
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-            overflow: "hidden", // Ensures the content stays within bounds
-            cursor: "pointer", // Adds pointer cursor
+            overflow: "hidden",
+            cursor: "pointer",
             ":hover, :focus-within": {
-              transform: "scale(1.03)", // Slight zoom effect
-              boxShadow: "0 12px 20px rgba(0, 0, 0, 0.2)", // Enhanced shadow on hover
+              transform: "scale(1.03)",
+              boxShadow: "0 12px 20px rgba(0, 0, 0, 0.2)",
             },
             mb: 2,
-
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
           }}
         >
+          {/* Background Hover Effect */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: isHovered ? "rgba(0, 0, 0, 0.4)" : "transparent",
+              transition: "background-color 0.3s ease",
+            }}
+          />
+
           {/* Image */}
           <Box
             component="img"
-            loading="lazy"
             src={image}
             alt={title}
             sx={{
@@ -86,16 +108,13 @@ const ImageCard = ({
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent overlay
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              opacity: 0, // Initially hidden
+              opacity: isHovered ? 1 : 0,
               transition: "opacity 0.3s ease",
-              ":hover": {
-                opacity: 1, // Show overlay on hover
-              },
             }}
           >
             <Typography
@@ -129,25 +148,70 @@ const ImageCard = ({
         </Box>
       ) : (
         <>
-          {/* Workshop Title */}
+          {/* Title & Description */}
+
           <Typography
             variant="h6"
             gutterBottom
             sx={{
               fontWeight: "bold",
+              position: "relative",
+              transition: "background-color 0.3s ease",
+              px: 1, // Add padding for better effect
+              borderRadius: "5px",
             }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             {title}
           </Typography>
-          {/* Workshop Description */}
+
           <Typography
             variant="body2"
             sx={{
               color: "#666",
+              mb: 1,
+              position: "relative",
+              transition: "background-color 0.3s ease",
+              px: 1,
+              borderRadius: "5px",
             }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             {desc}
           </Typography>
+
+          {/* Support Button */}
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent parent click event
+              onSupportClick?.();
+            }}
+            sx={{
+              mt: 1,
+              px: 3,
+              py: 1.2,
+              borderRadius: "12px",
+              fontWeight: "bold",
+              textTransform: "none",
+              backgroundColor: "#FFB400", // Warm gold for donation vibe
+              "&:hover": {
+                backgroundColor: "#DFA000", // Slightly darker gold on hover
+                boxShadow: "0px 0px 20px rgba(255, 180, 0, 0.7)", // Glow effect
+              },
+              color: "#fff",
+              boxShadow: isHovered
+                ? "0px 5px 12px rgba(255, 180, 0, 0.5)"
+                : "0px 5px 12px rgba(0, 0, 0, 0.2)",
+              transition: "box-shadow 0.3s ease",
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            Support the Artist 🎨💙
+          </Button>
         </>
       )}
     </Grid>
@@ -163,4 +227,5 @@ interface ImageCardProps {
   loading?: boolean;
   key: number;
   onClick?: () => void;
+  onSupportClick?: () => void;
 }
