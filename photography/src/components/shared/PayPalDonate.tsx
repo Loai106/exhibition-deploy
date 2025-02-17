@@ -55,6 +55,7 @@ const PayPalDonate = ({ open, handleClose, paintingId }: PayPalDonateProps) => {
             alignItems: "center",
             justifyContent: "center",
             gap: 2,
+            maxHeight: "80vh",
           }}
         >
           {showThankYou ? (
@@ -142,113 +143,120 @@ const PayPalDonate = ({ open, handleClose, paintingId }: PayPalDonateProps) => {
                   intent: "capture",
                 }}
               >
-                <PayPalButtons
-                  style={{
-                    layout: "horizontal",
-                    height: 50, // Adjust button height
-                    shape: "rect",
-                    label: "pay",
-                  }}
-                  fundingSource={undefined}
-                  createOrder={async () => {
-                    if (!isFormValid) {
-                      setToast({
-                        open: true,
-                        message:
-                          "Please enter a valid name, email, and amount.",
-                        severity: "error",
-                      });
-                      return null;
-                    }
-                    try {
-                      const response = await fetch(BASE_URL + "/create-order", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          amount: amount.toString(),
-                          name,
-                          email,
-                          painting_id: paintingId,
-                        }),
-                      });
-
-                      const orderData = await response.json();
-
-                      if (orderData.id) {
-                        return orderData.id;
+                <Box sx={{ overflowY: "auto", maxHeight: "50vh" }}>
+                  <PayPalButtons
+                    style={{
+                      layout: "vertical",
+                      height: 50, // Adjust button height
+                      shape: "rect",
+                      label: "pay",
+                    }}
+                    fundingSource={undefined}
+                    createOrder={async () => {
+                      if (!isFormValid) {
+                        setToast({
+                          open: true,
+                          message:
+                            "Please enter a valid name, email, and amount.",
+                          severity: "error",
+                        });
+                        return null;
                       }
-                      throw new Error(
-                        orderData.message ||
-                          orderData.error ||
-                          "Failed to create order"
-                      );
-                    } catch (error: any) {
-                      setToast({
-                        open: true,
-                        message:
-                          error.message ||
-                          error.error ||
-                          "Error creating order",
-                        severity: "error",
-                      });
-                      return null;
-                    }
-                  }}
-                  onApprove={async (data, actions) => {
-                    try {
-                      if (!actions || !actions.order) {
-                        throw new Error("PayPal order actions are undefined.");
-                      }
+                      try {
+                        const response = await fetch(
+                          BASE_URL + "/create-order",
+                          {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              amount: amount.toString(),
+                              name,
+                              email,
+                              painting_id: paintingId,
+                            }),
+                          }
+                        );
 
-                      const capture = await actions.order.capture();
+                        const orderData = await response.json();
 
-                      const response = await fetch(
-                        `${BASE_URL}/capture-payment/${data.orderID}`,
-                        {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ capture }),
+                        if (orderData.id) {
+                          return orderData.id;
                         }
-                      );
-
-                      const orderData = await response.json();
-                      const errorDetail = orderData?.details?.[0];
-
-                      if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
-                        return actions.restart(); // Retry payment
-                      } else if (errorDetail) {
                         throw new Error(
-                          `${errorDetail.description} (Debug ID: ${orderData.debug_id})`
+                          orderData.message ||
+                            orderData.error ||
+                            "Failed to create order"
                         );
-                      } else if (!orderData?.purchase_units) {
-                        throw new Error(
-                          `Unexpected response: ${JSON.stringify(orderData)}`
-                        );
+                      } catch (error: any) {
+                        setToast({
+                          open: true,
+                          message:
+                            error.message ||
+                            error.error ||
+                            "Error creating order",
+                          severity: "error",
+                        });
+                        return null;
                       }
+                    }}
+                    onApprove={async (data, actions) => {
+                      try {
+                        if (!actions || !actions.order) {
+                          throw new Error(
+                            "PayPal order actions are undefined."
+                          );
+                        }
 
-                      setToast({
-                        open: true,
-                        message:
-                          "Payment Successful! Thank you for your support!",
-                        severity: "success",
-                      });
+                        const capture = await actions.order.capture();
 
-                      setShowThankYou(true);
+                        const response = await fetch(
+                          `${BASE_URL}/capture-payment/${data.orderID}`,
+                          {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ capture }),
+                          }
+                        );
 
-                      setTimeout(() => {
-                        handleClose();
-                        setShowThankYou(false);
-                      }, 3000);
-                    } catch (error: any) {
-                      setToast({
-                        open: true,
-                        message: error.message || "Payment Failed",
-                        severity: "error",
-                      });
-                    }
-                  }}
-                  disabled={!isFormValid}
-                />
+                        const orderData = await response.json();
+                        const errorDetail = orderData?.details?.[0];
+
+                        if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+                          return actions.restart(); // Retry payment
+                        } else if (errorDetail) {
+                          throw new Error(
+                            `${errorDetail.description} (Debug ID: ${orderData.debug_id})`
+                          );
+                        } else if (!orderData?.purchase_units) {
+                          throw new Error(
+                            `Unexpected response: ${JSON.stringify(orderData)}`
+                          );
+                        }
+
+                        setToast({
+                          open: true,
+                          message:
+                            "Payment Successful! Thank you for your support!",
+                          severity: "success",
+                        });
+
+                        setShowThankYou(true);
+
+                        setTimeout(() => {
+                          handleClose();
+                          setShowThankYou(false);
+                        }, 3000);
+                      } catch (error: any) {
+                        setToast({
+                          open: true,
+                          message: error.message || "Payment Failed",
+                          severity: "error",
+                        });
+                      }
+                    }}
+                    disabled={!isFormValid}
+                  />
+                </Box>
               </PayPalScriptProvider>
             </Box>
           )}

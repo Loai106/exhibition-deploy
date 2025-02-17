@@ -1,10 +1,4 @@
-import {
-  Box,
-  Typography,
-  Skeleton,
-  Grid2 as Grid,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Skeleton, Grid2 as Grid } from "@mui/material";
 import { useState } from "react";
 
 const ImageCard = ({
@@ -14,7 +8,6 @@ const ImageCard = ({
   loading,
   key,
   onClick,
-  onSupportClick,
 }: ImageCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -183,35 +176,6 @@ const ImageCard = ({
           </Typography>
 
           {/* Support Button */}
-          <Button
-            variant="contained"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent parent click event
-              onSupportClick?.();
-            }}
-            sx={{
-              mt: 1,
-              px: 3,
-              py: 1.2,
-              borderRadius: "12px",
-              fontWeight: "bold",
-              textTransform: "none",
-              backgroundColor: "#FFB400", // Warm gold for donation vibe
-              "&:hover": {
-                backgroundColor: "#DFA000", // Slightly darker gold on hover
-                boxShadow: "0px 0px 20px rgba(255, 180, 0, 0.7)", // Glow effect
-              },
-              color: "#fff",
-              boxShadow: isHovered
-                ? "0px 5px 12px rgba(255, 180, 0, 0.5)"
-                : "0px 5px 12px rgba(0, 0, 0, 0.2)",
-              transition: "box-shadow 0.3s ease",
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            Support the Artist 🎨💙
-          </Button>
         </>
       )}
     </Grid>

@@ -11,11 +11,13 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import useGetSinglePainting from "../hooks/useGetSinglePainting";
 import PageTitle from "../components/shared/PageTitle";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
+import PayPalDonate from "../components/shared/PayPalDonate";
 
 const ExhibitionDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [openPayPal, setOpenPayPal] = useState<string | undefined>();
 
   const paintId = useMemo(() => location.state?.paintId, [location.state]);
   const { data: paintingData, isFetching } = useGetSinglePainting(paintId);
@@ -29,6 +31,10 @@ const ExhibitionDetail = () => {
       });
     }
   }, [artist, navigate]);
+
+  const handleSupportClick = () => {
+    setOpenPayPal(paintId.toString());
+  };
 
   return (
     <Container sx={{ mb: 4 }}>
@@ -50,6 +56,7 @@ const ExhibitionDetail = () => {
                 width: "100%",
                 height: "auto",
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
               }}
@@ -64,6 +71,32 @@ const ExhibitionDetail = () => {
                   objectFit: "contain",
                 }}
               />
+              <Button
+                variant="contained"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent parent click event
+                  handleSupportClick?.();
+                }}
+                sx={{
+                  mt: 1,
+                  px: 4,
+                  py: 3,
+                  borderRadius: "12px",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  backgroundColor: "#000",
+                  fontSize: "16px",
+                  "&:hover": {
+                    backgroundColor: "#f5f5f5", // Dark gray on hover
+                    boxShadow: "0px 0px 20px rgba(0, 0, 0, 0.2)", // Glow effect
+                    color: "#555", // Dark gray text color
+                  },
+                  boxShadow: "0px 5px 12px rgba(0, 0, 0, 0.2)",
+                  transition: "box-shadow 0.3s ease",
+                }}
+              >
+                Support the Artist 🎨💙
+              </Button>
             </Box>
           )}
         </Grid>
@@ -138,6 +171,11 @@ const ExhibitionDetail = () => {
           )}
         </Grid>
       </Grid>
+      <PayPalDonate
+        open={!!openPayPal}
+        handleClose={() => setOpenPayPal(undefined)}
+        paintingId={openPayPal || ""}
+      />
     </Container>
   );
 };

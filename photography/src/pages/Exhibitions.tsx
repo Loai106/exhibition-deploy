@@ -3,12 +3,10 @@ import useGetAllPainting from "../hooks/useGetAllPainting";
 import ImageCard from "../components/shared/ImageCard";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "../components/shared/PageTitle";
-import { useRef, useState } from "react";
-import PayPalDonate from "../components/shared/PayPalDonate";
+import { useRef } from "react";
 
 const Exhibitions = () => {
   const { data: paintingsData, isLoading } = useGetAllPainting();
-  const [openPayPal, setOpenPayPal] = useState<string | undefined>();
   const firstTimeRef = useRef(true);
   const navigate = useNavigate();
 
@@ -17,10 +15,6 @@ const Exhibitions = () => {
       firstTimeRef.current = false;
       navigate(`/exhibitions/${paintId}`, { state: { paintId } });
     }
-  };
-
-  const handleSupportClick = (paintId: string | number) => {
-    setOpenPayPal(paintId.toString());
   };
 
   return (
@@ -43,7 +37,6 @@ const Exhibitions = () => {
               }`}
               loading={false}
               onClick={() => handleCardClick(painting.painting_id)}
-              onSupportClick={() => handleSupportClick(painting.painting_id)}
             />
           ))
         ) : (
@@ -64,11 +57,6 @@ const Exhibitions = () => {
           </Box>
         )}
       </Grid>
-      <PayPalDonate
-        open={!!openPayPal}
-        handleClose={() => setOpenPayPal(undefined)}
-        paintingId={openPayPal || ""}
-      />
     </Container>
   );
 };
