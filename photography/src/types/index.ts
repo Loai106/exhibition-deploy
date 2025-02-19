@@ -3,7 +3,7 @@ import axios from "axios";
 export const BASE_URL = "https://api.canvasgaza.com/api";
 
 export const CLIENT_ID_PAYPAL =
-  "AUXZTI3bGgUWRoPA7pYxJ_ui-MavozqGjvHgAeob-vRS2UKNbyZJoqcXix0WWgnUUsjppDrKBkfGAS3w";
+  "ATGYsE7RtOxhz_3FVRydHSoJV2qVjhbPv-emth26tKg1ktR_Xq0YJ2tyHBEZjW96SXqqgdGKALSR5wrd";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
