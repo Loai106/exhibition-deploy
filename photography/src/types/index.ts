@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://exhibition-mwpg.onrender.com/api";
+export const BASE_URL = "https://api.canvasgaza.com/api";
 
 export const CLIENT_ID_PAYPAL =
   "AUXZTI3bGgUWRoPA7pYxJ_ui-MavozqGjvHgAeob-vRS2UKNbyZJoqcXix0WWgnUUsjppDrKBkfGAS3w";
